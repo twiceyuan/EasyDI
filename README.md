@@ -1,6 +1,6 @@
 # EasyDI
 
-一个 DI 库的简单实现。模仿 Koin 的 API 实现以最简单的方式实现依赖注入部分功能，学习使用。
+一个 DI 库的简单实现。模仿 Koin 的 API，以最简单的方式实现依赖注入部分功能，学习使用。
 
 ## API 参考
 
@@ -42,7 +42,13 @@ EasyDI.defineScope(catQualifier) {
 使用时注入：
 
 ```kotlin
+val catQualifier = named("Cat")
 
+const val PROP_KEY_ID = "id"
+
+fun createCatScope(sessionId: Int) =
+    EasyDI.getOrCreateScope(sessionId.toString(), catQualifier, mapOf(PROP_KEY_ID to sessionId))
+    
 class MainActivity : AppCompatActivity() {
 
     private val speaker: Speaker by inject()
